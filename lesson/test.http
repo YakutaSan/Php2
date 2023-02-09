@@ -1,0 +1,3 @@
+GET http://localhost:80/some/path?some_parameter=123
+Some-Header: Some Value
+Cookie: XDEBUG_SESSION=start
