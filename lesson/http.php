@@ -1,17 +1,17 @@
 <?php
 use App\Blog\Exceptions\AppException;
-use App\Blog\Repositories\PostsRepository\SqlitePostsRepository;
-use App\Blog\Repositories\UsersRepository\SqliteUsersRepository;
 use App\Http\Actions\Posts\CreatePost;
-use App\Http\Actions\Users\CreateUser;
 use App\Http\Actions\Users\FindByUsername;
 use App\Http\ErrorResponse;
 use App\Http\Request;
-use App\Http\SuccessfulResponse;
 
-require_once __DIR__ . '/vendor/autoload.php';
 
-$request = new Request($_GET, $_SERVER, file_get_contents('php://input'));
+$container = require __DIR__ . '/bootstrap.php';
+$request = new Request(
+    $_GET,
+    $_SERVER,
+    file_get_contents('php://input'),
+);
 
 try {
     $path = $request->path();
@@ -21,55 +21,45 @@ try {
 }
 
 try {
-    // Пытаемся получить HTTP-метод запроса
     $method = $request->method();
 } catch (HttpException) {
-    // Возвращаем неудачный ответ,
-    // если по какой-то причине
-    // не можем получить метод
     (new ErrorResponse)->send();
     return;
 }
 
+// Ассоциируем маршруты с именами классов действий,
+// вместо готовых объектов
 $routes = [
     'GET' => [
-        '/users/show' => new FindByUsername(
-            new SqliteUsersRepository(
-                new PDO('sqlite:' . __DIR__ . '/blog.sqlite')
-            )
-        ),
+        '/users/show' => FindByUsername::class,
+        '/posts/show' => FindByUuid::class,
     ],
-    
     'POST' => [
-        '/users/create' => new CreateUser(
-            new SqliteUsersRepository(
-                new PDO('sqlite:' . __DIR__ . '/blog.sqlite')
-            )
-        ),
-        // Добавили новый маршрут
-        '/posts/create' => new CreatePost(
-            new SqlitePostsRepository(
-                new PDO('sqlite:' . __DIR__ . '/blog.sqlite')
-            ),
-            new SqliteUsersRepository(
-                new PDO('sqlite:' . __DIR__ . '/blog.sqlite')
-            )
-        ),
+        '/posts/create' => CreatePost::class,
     ],
 ];
 
-if (!array_key_exists($path, $routes[$method])) {
-    (new ErrorResponse('Not found'))->send();
+if (!array_key_exists($method, $routes)) {
+    (new ErrorResponse("Route not found: $method $path"))->send();
+
     return;
 }
 
-$action = $routes[$method][$path];
+if (!array_key_exists($path, $routes[$method])) {
+    (new ErrorResponse("Route not found: $method $path"))->send();
 
+    return;
+}
+// Получаем имя класса действия для маршрута
+$actionClassName = $routes[$method][$path];
+// С помощью контейнера
+// создаём объект нужного действия
+$action = $container->get($actionClassName);
 try {
     $response = $action->handle($request);
 } catch (AppException $e) {
     (new ErrorResponse($e->getMessage()))->send();
 }
-
+    
 $response->send();
-
+    
