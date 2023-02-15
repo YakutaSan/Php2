@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Blog\Repositories\PostsRepository;
+namespace GeekBrains\LevelTwo\Blog\Repositories\PostsRepository;
 
-use App\Blog\Post;
-use App\Blog\UUID;
+use GeekBrains\LevelTwo\Blog\Post;
+use GeekBrains\LevelTwo\Blog\UUID;
 
 interface PostsRepositoryInterface
 {
     public function save(Post $post): void;
     public function get(UUID $uuid): Post;
-    public function delete(UUID $uuid): Post;
+    public function delete(UUID $uuid): void;
 }

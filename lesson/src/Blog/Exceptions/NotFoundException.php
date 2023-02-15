@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Blog\Exceptions;
-use \Exception;
+namespace GeekBrains\LevelTwo\Blog\Exceptions;
 
-class NotFoundException extends Exception
+use Psr\Container\NotFoundExceptionInterface;
+
+class NotFoundException extends AppException implements NotFoundExceptionInterface
 {
-    
+
 }

@@ -1,57 +1,68 @@
 <?php
 
-namespace App\Blog\Repositories\PostsRepository;
+namespace GeekBrains\LevelTwo\Blog\Repositories\PostsRepository;
 
-use App\Blog\Exceptions\PostNotFoundException;
-use App\Blog\Post;
-use App\Blog\Repositories\UsersRepository\SqliteUsersRepository;
-use App\Blog\UUID;
-use \PDO;
-use \PDOStatement;
+use GeekBrains\LevelTwo\Blog\Exceptions\InvalidArgumentException;
+use GeekBrains\LevelTwo\Blog\Exceptions\PostNotFoundException;
+use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
+use GeekBrains\LevelTwo\Blog\Post;
+use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\SqliteUsersRepository;
+use GeekBrains\LevelTwo\Blog\UUID;
+
 
 class SqlitePostsRepository implements PostsRepositoryInterface
 {
-    private PDO $connection;
+    private \PDO $connection;
 
-    public function __construct(PDO $connection) {
+    public function __construct(\PDO $connection)
+    {
         $this->connection = $connection;
     }
-	
-	public function save(Post $post): void 
+
+    public function save(Post $post): void
     {
         $statement = $this->connection->prepare(
-            'INSERT INTO posts (uuid, author_uuid, title, text) 
-            VALUES (:uuid, :author_uuid, :title, :text)'
+            'INSERT INTO posts (uuid, author_uuid, title, text) VALUES (:uuid, :author_uuid, :title, :text)'
         );
 
         $statement->execute([
-            ':uuid' => $post->getUuid(),
+            ':uuid' => $post->uuid(),
             ':author_uuid' => $post->getUser()->uuid(),
             ':title' => $post->getTitle(),
             ':text' => $post->getText()
         ]);
-	}
-	
-	public function get(UUID $uuid): Post 
+
+    }
+
+
+    /**
+     * @throws PostNotFoundException
+     * @throws UserNotFoundException
+     * @throws InvalidArgumentException
+     */
+    public function get(UUID $uuid): Post
     {
         $statement = $this->connection->prepare(
-            'SELECT * FROM users WHERE uuid = :uuid'
+            'SELECT * FROM posts WHERE uuid = :uuid'
         );
-
         $statement->execute([
-            ':uuid' => $uuid,
+            ':uuid' => (string)$uuid,
         ]);
 
         return $this->getPost($statement, $uuid);
-	}
+    }
 
-    private function getPost(PDOStatement $statement, string $postUuid): Post
+    /**
+     * @throws PostNotFoundException
+     * @throws InvalidArgumentException|UserNotFoundException
+     */
+    private function getPost(\PDOStatement $statement, string $postUuId): Post
     {
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
 
-        if (false === $result) {
+        if ($result === false) {
             throw new PostNotFoundException(
-                "Cannot get user: $postUuid"
+                "Cannot find post: $postUuId"
             );
         }
 
@@ -64,6 +75,7 @@ class SqlitePostsRepository implements PostsRepositoryInterface
             $result['title'],
             $result['text']
         );
+
     }
 
     public function delete(UUID $uuid): void

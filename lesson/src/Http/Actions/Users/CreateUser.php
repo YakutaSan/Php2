@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Http\Actions\Users;
-use App\Blog\Exceptions\HttpException;
-use App\Blog\Name;
-use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use App\Blog\User;
-use App\Blog\UUID;
-use App\Http\Actions\ActionInterface;
-use App\Http\ErrorResponse;
-use App\Http\Request;
-use App\Http\Response;
-use App\Http\SuccessfulResponse;
+namespace GeekBrains\LevelTwo\Http\Actions\Users;
+
+use GeekBrains\LevelTwo\Blog\Exceptions\HttpException;
+use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use GeekBrains\LevelTwo\Blog\User;
+use GeekBrains\LevelTwo\Blog\UUID;
+use GeekBrains\LevelTwo\http\Actions\ActionInterface;
+use GeekBrains\LevelTwo\http\ErrorResponse;
+use GeekBrains\LevelTwo\http\Request;
+use GeekBrains\LevelTwo\http\Response;
+use GeekBrains\LevelTwo\http\SuccessfulResponse;
+use GeekBrains\LevelTwo\Person\Name;
 
 class CreateUser implements ActionInterface
 {
     public function __construct(
         private UsersRepositoryInterface $usersRepository,
-    ){}
+    ) {
+    }
 
     public function handle(Request $request): Response
     {
@@ -31,14 +33,16 @@ class CreateUser implements ActionInterface
                 ),
                 $request->jsonBodyField('username')
             );
+
         } catch (HttpException $e) {
             return new ErrorResponse($e->getMessage());
+
         }
 
         $this->usersRepository->save($user);
 
         return new SuccessfulResponse([
-            'uuid' => (string) $newUserUuid,
+            'uuid' => (string)$newUserUuid,
         ]);
     }
 }

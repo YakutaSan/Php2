@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Http\Actions\Likes;
-use App\Blog\Exceptions\HttpException;
-use App\Blog\Exceptions\LikeAlreadyExists;
-use App\Blog\Exceptions\PostNotFoundException;
-use App\Blog\Like;
-use App\Blog\Repositories\LikesRepository\LikesRepositoryInterface;
-use App\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
-use App\Blog\UUID;
-use App\Http\Actions\ActionInterface;
-use App\Http\ErrorResponse;
-use App\Http\Request;
-use App\Http\Response;
-use App\Http\SuccessfulResponse;
+namespace GeekBrains\LevelTwo\Http\Actions\Likes;
+
+use GeekBrains\LevelTwo\Blog\Exceptions\HttpException;
+use GeekBrains\LevelTwo\Blog\Exceptions\InvalidArgumentException;
+use GeekBrains\LevelTwo\Blog\Exceptions\LikeAlreadyExists;
+use GeekBrains\LevelTwo\Blog\Exceptions\PostNotFoundException;
+use GeekBrains\LevelTwo\Blog\Like;
+use GeekBrains\LevelTwo\Blog\Repositories\LikesRepository\LikesRepositoryInterface;
+use GeekBrains\LevelTwo\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
+use GeekBrains\LevelTwo\Blog\UUID;
+use GeekBrains\LevelTwo\Http\Actions\ActionInterface;
+use GeekBrains\LevelTwo\Http\ErrorResponse;
+use GeekBrains\LevelTwo\http\Request;
+use GeekBrains\LevelTwo\http\Response;
+use GeekBrains\LevelTwo\Http\SuccessfulResponse;
 
 class CreatePostLike implements ActionInterface
 {
@@ -24,7 +26,9 @@ class CreatePostLike implements ActionInterface
     }
 
 
-
+    /**
+     * @throws InvalidArgumentException
+     */
     public function handle(Request $request): Response
     {
         try {
@@ -34,7 +38,7 @@ class CreatePostLike implements ActionInterface
             return new ErrorResponse($e->getMessage());
         }
 
-        
+        //TODO тоже и для юзера добавить
         try {
             $this->postRepository->get(new UUID($postUuid));
         } catch (PostNotFoundException $exception) {
@@ -58,7 +62,7 @@ class CreatePostLike implements ActionInterface
 
         $this->likesRepository->save($like);
 
-        return new SuccessfulResponse(
+        return new SuccessFulResponse(
             ['uuid' => (string)$newLikeUuid]
         );
     }

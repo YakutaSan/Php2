@@ -1,15 +1,24 @@
 <?php
 
-use App\Blog\Command\Arguments;
-use App\Blog\Command\CreateUserCommand;
-use App\Blog\Exceptions\AppException;
+use GeekBrains\LevelTwo\Blog\Commands\Arguments;
+use GeekBrains\LevelTwo\Blog\Commands\CreateUserCommand;
+use GeekBrains\LevelTwo\Blog\Like;
+use GeekBrains\LevelTwo\Blog\UUID;
+use GeekBrains\LevelTwo\Blog\Repositories\LikesRepository\SqliteLikesRepository;
+use GeekBrains\LevelTwo\Blog\Repositories\LikesRepository\LikesRepositoryInterface;
+use Psr\Log\LoggerInterface;
 
 $container = require __DIR__ . '/bootstrap.php';
 
-$command = $container->get(CreateUserCommand::class);
+$logger = $container->get(LoggerInterface::class);
 
 try {
+
+    // При помощи контейнера создаём команду
+    $command = $container->get(CreateUserCommand::class);
     $command->handle(Arguments::fromArgv($argv));
-} catch (AppException $e) {
-    echo "{$e->getMessage()}\n";
+
+} catch (Exception $e) {
+    $logger->error($e->getMessage(), ['exception' => $e]);
+    echo $e->getMessage();
 }

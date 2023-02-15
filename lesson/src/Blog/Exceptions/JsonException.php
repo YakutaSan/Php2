@@ -1,8 +1,8 @@
 <?php
-namespace App\Blog\Exceptions;
-use App\Blog\Exceptions\AppException;
+
+namespace GeekBrains\LevelTwo\Blog\Exceptions;
 
 class JsonException extends AppException
 {
-    
+
 }

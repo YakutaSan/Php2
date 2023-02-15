@@ -2,11 +2,11 @@
 
 namespace GeekBrains\LevelTwo\Blog\Repositories\LikesRepository;
 
-use App\Blog\Exceptions\LikeAlreadyExists;
-use App\Blog\Exceptions\LikesNotFoundException;
-use App\Blog\Like;
-use App\Blog\Repositories\LikesRepository\LikesRepositoryInterface;
-use App\Blog\UUID;
+use GeekBrains\LevelTwo\Blog\Exceptions\InvalidArgumentException;
+use GeekBrains\LevelTwo\Blog\Exceptions\LikesNotFoundException;
+use GeekBrains\LevelTwo\Blog\Like;
+use GeekBrains\LevelTwo\Blog\UUID;
+use GeekBrains\LevelTwo\Blog\Exceptions\LikeAlreadyExists;
 
 
 class SqliteLikesRepository implements LikesRepositoryInterface
@@ -31,6 +31,10 @@ class SqliteLikesRepository implements LikesRepositoryInterface
         ]);
     }
 
+    /**
+     * @throws LikesNotFoundException
+     * @throws InvalidArgumentException
+     */
     public function getByPostUuid(UUID $uuid): array
     {
         $statement = $this->connection->prepare(
@@ -61,6 +65,9 @@ class SqliteLikesRepository implements LikesRepositoryInterface
         return $likes;
     }
 
+    /**
+     * @throws LikeAlreadyExists
+     */
     public function checkUserLikeForPostExists($postUuid, $userUuid): void
     {
         $statement = $this->connection->prepare(
