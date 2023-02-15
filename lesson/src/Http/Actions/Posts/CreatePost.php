@@ -1,41 +1,41 @@
 <?php
 
 namespace App\Http\Actions\Posts;
+use App\Blog\Exceptions\AuthException;
 use App\Blog\Exceptions\HttpException;
-use App\Blog\Exceptions\InvalidArgumentException;
-use App\Blog\Exceptions\UserNotFoundException;
 use App\Blog\Post;
 use App\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
-use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
 use App\Blog\UUID;
 use App\Http\Actions\ActionInterface;
+use App\Http\Auth\IdentificationInterface;
 use App\Http\ErrorResponse;
 use App\Http\Request;
 use App\Http\Response;
 use App\Http\SuccessfulResponse;
+use Psr\Log\LoggerInterface;
+
 
 class CreatePost implements ActionInterface
 {
-    // Внедряем репозитории статей и пользователей
     public function __construct(
         private PostsRepositoryInterface $postsRepository,
-        private UsersRepositoryInterface $usersRepository,
+// Внедряем контракт логгера
+        private LoggerInterface $logger,
+        private IdentificationInterface $identification,
+
+
     )
     {
     }
+
+    /**
+     * @throws AuthException
+     * @throws \InvalidArgumentException
+     */
     public function handle(Request $request): Response
     {
-        try {
-            $authorUuid = new UUID($request->jsonBodyField('author_uuid'));
-        } catch (HttpException | InvalidArgumentException $e) {
-            return new ErrorResponse($e->getMessage());
-        }
+        $user = $this->identification->user($request);
 
-        try {
-            $user = $this->usersRepository->get($authorUuid);
-        } catch (UserNotFoundException $e) {
-            return new ErrorResponse($e->getMessage());
-        }
 
         $newPostUuid = UUID::random();
 
@@ -46,14 +46,15 @@ class CreatePost implements ActionInterface
                 $request->jsonBodyField('title'),
                 $request->jsonBodyField('text'),
             );
-        } catch (HttpException $e) {
-            return new ErrorResponse($e->getMessage());
+        } catch (HttpException $exception) {
+            return new ErrorResponse($exception->getMessage());
         }
 
         $this->postsRepository->save($post);
-        
+        $this->logger->info("Post created: $newPostUuid");
+
         return new SuccessfulResponse([
-            'uuid' => (string) $newPostUuid,
+            'uuid' => (string)$newPostUuid,
         ]);
     }
 }

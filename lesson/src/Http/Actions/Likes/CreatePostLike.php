@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Actions\Likes;
+
 use App\Blog\Exceptions\HttpException;
+use App\Blog\Exceptions\InvalidArgumentException;
 use App\Blog\Exceptions\LikeAlreadyExists;
 use App\Blog\Exceptions\PostNotFoundException;
 use App\Blog\Like;
@@ -10,8 +12,8 @@ use App\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
 use App\Blog\UUID;
 use App\Http\Actions\ActionInterface;
 use App\Http\ErrorResponse;
-use App\Http\Request;
-use App\Http\Response;
+use App\http\Request;
+use App\http\Response;
 use App\Http\SuccessfulResponse;
 
 class CreatePostLike implements ActionInterface
@@ -24,7 +26,9 @@ class CreatePostLike implements ActionInterface
     }
 
 
-
+    /**
+     * @throws InvalidArgumentException
+     */
     public function handle(Request $request): Response
     {
         try {
@@ -34,7 +38,7 @@ class CreatePostLike implements ActionInterface
             return new ErrorResponse($e->getMessage());
         }
 
-        
+        //TODO тоже и для юзера добавить
         try {
             $this->postRepository->get(new UUID($postUuid));
         } catch (PostNotFoundException $exception) {
@@ -58,7 +62,7 @@ class CreatePostLike implements ActionInterface
 
         $this->likesRepository->save($like);
 
-        return new SuccessfulResponse(
+        return new SuccessFulResponse(
             ['uuid' => (string)$newLikeUuid]
         );
     }

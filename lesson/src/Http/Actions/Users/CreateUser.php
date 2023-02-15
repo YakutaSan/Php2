@@ -2,7 +2,6 @@
 
 namespace App\Http\Actions\Users;
 use App\Blog\Exceptions\HttpException;
-use App\Blog\Name;
 use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
 use App\Blog\User;
 use App\Blog\UUID;
@@ -11,12 +10,16 @@ use App\Http\ErrorResponse;
 use App\Http\Request;
 use App\Http\Response;
 use App\Http\SuccessfulResponse;
+use App\Person\Name;
+
+
 
 class CreateUser implements ActionInterface
 {
     public function __construct(
         private UsersRepositoryInterface $usersRepository,
-    ){}
+    ) {
+    }
 
     public function handle(Request $request): Response
     {
@@ -31,14 +34,16 @@ class CreateUser implements ActionInterface
                 ),
                 $request->jsonBodyField('username')
             );
+
         } catch (HttpException $e) {
             return new ErrorResponse($e->getMessage());
+
         }
 
         $this->usersRepository->save($user);
 
         return new SuccessfulResponse([
-            'uuid' => (string) $newUserUuid,
+            'uuid' => (string)$newUserUuid,
         ]);
     }
 }

@@ -10,17 +10,23 @@ use App\Http\Request;
 use App\Http\Response;
 use App\Http\SuccessfulResponse;
 
+
+
 class DeletePost implements ActionInterface
 {
     public function __construct(
         private PostsRepositoryInterface $postsRepository
-    ){}
+    )
+    {
+    }
+
 
     public function handle(Request $request): Response
     {
         try {
             $postUuid = $request->query('uuid');
             $this->postsRepository->get(new UUID($postUuid));
+
         } catch (PostNotFoundException $error) {
             return new ErrorResponse($error->getMessage());
         }

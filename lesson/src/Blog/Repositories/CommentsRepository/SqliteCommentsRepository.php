@@ -9,13 +9,18 @@ use App\Blog\Repositories\UsersRepository\SqliteUsersRepository;
 use App\Blog\UUID;
 use \PDO;
 use \PDOStatement;
+use Psr\Log\LoggerInterface;
 
 class SqliteCommentsRepository implements CommentsRepositoryInterface
 {
     private PDO $connection;
+    private LoggerInterface $logger;
 
-    public function __construct(PDO $connection) {
+
+    public function __construct(PDO $connection, LoggerInterface $logger)
+    {
         $this->connection = $connection;
+        $this->logger = $logger;
     }
 
     public function save(Comment $comment): void 

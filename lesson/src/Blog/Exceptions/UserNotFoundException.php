@@ -2,7 +2,7 @@
 
 namespace App\Blog\Exceptions;
 
-class UserNotFoundException extends \Exception
+class UserNotFoundException extends AppException
 {
-    
+
 }

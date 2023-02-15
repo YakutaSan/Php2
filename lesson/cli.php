@@ -1,15 +1,20 @@
 <?php
 
-use App\Blog\Command\Arguments;
-use App\Blog\Command\CreateUserCommand;
-use App\Blog\Exceptions\AppException;
+
+use App\Blog\Commands\Arguments;
+use Psr\Log\LoggerInterface;
 
 $container = require __DIR__ . '/bootstrap.php';
 
-$command = $container->get(CreateUserCommand::class);
+$logger = $container->get(LoggerInterface::class);
 
 try {
+
+    // При помощи контейнера создаём команду
+    $command = $container->get(CreateUserCommand::class);
     $command->handle(Arguments::fromArgv($argv));
-} catch (AppException $e) {
-    echo "{$e->getMessage()}\n";
+
+} catch (Exception $e) {
+    $logger->error($e->getMessage(), ['exception' => $e]);
+    echo $e->getMessage();
 }

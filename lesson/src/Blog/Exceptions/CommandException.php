@@ -2,7 +2,7 @@
 
 namespace App\Blog\Exceptions;
 
-class CommandException extends \Exception
+class CommandException extends AppException
 {
-    
+
 }

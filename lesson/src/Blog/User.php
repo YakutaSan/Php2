@@ -1,6 +1,7 @@
 <?php
-
 namespace App\Blog;
+
+use App\Person\Name;
 
 class User
 {
@@ -8,34 +9,64 @@ class User
     private Name $name;
     private string $username;
 
-    public function __construct(
-        UUID $uuid, 
-        Name $name, 
-        string $username
-    )
+    /**
+     * @param UUID $uuid
+     * @param Name $name
+     * @param string $login
+     */
+    public function __construct(UUID $uuid, Name $name, string $login)
     {
         $this->uuid = $uuid;
         $this->name = $name;
-        $this->username = $username;
+        $this->username = $login;
     }
 
-    public function name(): Name
+    public function __toString(): string
     {
-        return $this->name;
+        return "Юзер $this->uuid с именем $this->name и логином $this->username." . PHP_EOL;
     }
 
+    /**
+     * @return UUID
+     */
     public function uuid(): UUID
     {
         return $this->uuid;
     }
 
+
+
+    /**
+     * @return Name
+     */
+    public function name(): Name
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param Name $name
+     */
+    public function setName(Name $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
     public function username(): string
     {
         return $this->username;
     }
 
-    public function __toString(): string
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username): void
     {
-        return "Юзер $this->uuid с именем $this->name и логином $this->username" . PHP_EOL;
+        $this->username = $username;
     }
+
+
 }
