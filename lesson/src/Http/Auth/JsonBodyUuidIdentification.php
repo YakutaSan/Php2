@@ -1,15 +1,15 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http\Auth;
+namespace App\Http\Auth;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\AuthException;
-use GeekBrains\LevelTwo\Blog\Exceptions\HttpException;
-use GeekBrains\LevelTwo\Blog\Exceptions\InvalidArgumentException;
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Http\Request;
+use App\Blog\Exceptions\AuthException;
+use App\Blog\Exceptions\HttpException;
+use App\Blog\Exceptions\InvalidArgumentException;
+use App\Blog\Exceptions\UserNotFoundException;
+use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use App\Blog\User;
+use App\Blog\UUID;
+use App\Http\Request;
 
 class JsonBodyUuidIdentification implements IdentificationInterface
 {

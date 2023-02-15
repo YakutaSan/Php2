@@ -1,12 +1,12 @@
 <?php
 
-namespace GeekBrains\LevelTwo;
+namespace App;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\SqliteUsersRepository;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Person\Name;
+
+use App\Blog\Repositories\UsersRepository\SqliteUsersRepository;
+use App\Blog\User;
+use App\Blog\UUID;
+use App\Person\Name;
 use PDO;
 use PDOStatement;
 use PHPUnit\Framework\TestCase;

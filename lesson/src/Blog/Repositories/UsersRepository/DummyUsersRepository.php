@@ -1,12 +1,12 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog\Repositories\UsersRepository;
+namespace App\Blog\Repositories\UsersRepository;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Person\Name;
+use App\Blog\Exceptions\UserNotFoundException;
+use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use App\Blog\User;
+use App\Blog\UUID;
+use App\Person\Name;
 
 class DummyUsersRepository implements UsersRepositoryInterface
 {

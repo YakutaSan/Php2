@@ -1,6 +1,6 @@
 <?php
 
-namespace GeekBrains\Blog\UnitTests;
+namespace App\Blog\UnitTests;
 
 use Psr\Log\LoggerInterface;
 use Stringable;

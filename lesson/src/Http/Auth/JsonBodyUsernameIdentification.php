@@ -1,13 +1,13 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http\Auth;
+namespace App\Http\Auth;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\AuthException;
-use GeekBrains\LevelTwo\Blog\Exceptions\HttpException;
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\http\Request;
-use GeekBrains\LevelTwo\Blog\User;
+use App\Blog\Exceptions\AuthException;
+use App\Blog\Exceptions\HttpException;
+use App\Blog\Exceptions\UserNotFoundException;
+use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use App\http\Request;
+use App\Blog\User;
 
 class JsonBodyUsernameIdentification implements IdentificationInterface
 {

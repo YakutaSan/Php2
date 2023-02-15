@@ -1,17 +1,16 @@
 <?php
 
 namespace Actions;
-
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\http\Actions\Users\FindByUsername;
-use GeekBrains\LevelTwo\http\ErrorResponse;
-use GeekBrains\LevelTwo\http\Request;
-use GeekBrains\LevelTwo\http\SuccessfulResponse;
-use GeekBrains\LevelTwo\Person\Name;
+use App\Blog\Exceptions\UserNotFoundException;
+use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use App\Blog\User;
+use App\Blog\UUID;
+use App\Http\Actions\Users\FindByUsername;
+use App\Http\Request;
+use App\Person\Name;
 use PHPUnit\Framework\TestCase;
+
+
 
 class FindByUsernameActionTest extends TestCase
 {

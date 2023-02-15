@@ -1,9 +1,9 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http;
+namespace App\Http;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\HttpException;
-use GeekBrains\LevelTwo\Blog\Exceptions\JsonException;
+use App\Blog\Exceptions\HttpException;
+use App\Blog\Exceptions\JsonException;
 
 
 class Request

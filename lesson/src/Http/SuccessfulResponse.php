@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace GeekBrains\LevelTwo\Http;
+namespace App\Http;
 
 class SuccessfulResponse extends Response
 {

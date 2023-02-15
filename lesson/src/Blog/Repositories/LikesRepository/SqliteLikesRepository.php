@@ -1,21 +1,23 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog\Repositories\LikesRepository;
+namespace App\Blog\Repositories\LikesRepository;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\InvalidArgumentException;
-use GeekBrains\LevelTwo\Blog\Exceptions\LikesNotFoundException;
-use GeekBrains\LevelTwo\Blog\Like;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Blog\Exceptions\LikeAlreadyExists;
+use App\Blog\Exceptions\InvalidArgumentException;
+use App\Blog\Exceptions\LikesNotFoundException;
+use App\Blog\Like;
+use App\Blog\UUID;
+use App\Blog\Exceptions\LikeAlreadyExists;
 
 
 class SqliteLikesRepository implements LikesRepositoryInterface
 {
     private \PDO $connection;
+    private LoggerInterface $logger;
 
-    public function __construct(\PDO $connection)
+    public function __construct(\PDO $connection, LoggerInterface $logger)
     {
         $this->connection = $connection;
+        $this->logger = $logger;
     }
 
     public function save(Like $like): void
@@ -29,6 +31,8 @@ class SqliteLikesRepository implements LikesRepositoryInterface
             ':user_uuid' => (string)$like->getUserId(),
             ':post_uuid' => (string)$like->getPostId(),
         ]);
+
+        $this->logger->info("Like created: {$like->uuid()}");
     }
 
     /**
@@ -48,9 +52,10 @@ class SqliteLikesRepository implements LikesRepositoryInterface
         $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         if (!$result) {
-            throw new LikesNotFoundException(
-                'No likes to post with uuid = : ' . $uuid
-            );
+            $message = 'No likes to post with uuid = : ' . $uuid;
+            $this->logger->warning($message);
+
+            throw new LikesNotFoundException($message);
         }
 
         $likes = [];

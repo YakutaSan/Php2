@@ -2,7 +2,7 @@
   "name": "geekbrains/leveltwo",
   "autoload": {
     "psr-4": {
-      "GeekBrains\\LevelTwo\\": "src/"
+      "App": "src/"
     }
   },
   "autoload-dev": {
@@ -22,7 +22,7 @@
     "symfony/polyfill-uuid": "^1.26",
     "ext-mbstring": "*",
     "psr/container": "^2.0",
-    "monolog/monolog": "^3.2",
+    "monolog/monolog": "*",
     "vlucas/phpdotenv": "^5.4"
   },
   "require-dev": {

@@ -1,14 +1,13 @@
 <?php
 
-namespace GeekBrains\LevelTwo;
+namespace App;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\PostNotFoundException;
-use GeekBrains\LevelTwo\Blog\Post;
-use GeekBrains\LevelTwo\Blog\Repositories\PostsRepository\SqlitePostsRepository;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\SqliteUsersRepository;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Person\Name;
+
+use App\Blog\Post;
+use App\Blog\Repositories\PostsRepository\SqlitePostsRepository;
+use App\Blog\User;
+use App\Blog\UUID;
+use App\Person\Name;
 use PDO;
 use PDOStatement;
 use PHPUnit\Framework\TestCase;

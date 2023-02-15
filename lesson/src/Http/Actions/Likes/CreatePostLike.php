@@ -1,20 +1,20 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http\Actions\Likes;
+namespace App\Http\Actions\Likes;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\HttpException;
-use GeekBrains\LevelTwo\Blog\Exceptions\InvalidArgumentException;
-use GeekBrains\LevelTwo\Blog\Exceptions\LikeAlreadyExists;
-use GeekBrains\LevelTwo\Blog\Exceptions\PostNotFoundException;
-use GeekBrains\LevelTwo\Blog\Like;
-use GeekBrains\LevelTwo\Blog\Repositories\LikesRepository\LikesRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Http\Actions\ActionInterface;
-use GeekBrains\LevelTwo\Http\ErrorResponse;
-use GeekBrains\LevelTwo\http\Request;
-use GeekBrains\LevelTwo\http\Response;
-use GeekBrains\LevelTwo\Http\SuccessfulResponse;
+use App\Blog\Exceptions\HttpException;
+use App\Blog\Exceptions\InvalidArgumentException;
+use App\Blog\Exceptions\LikeAlreadyExists;
+use App\Blog\Exceptions\PostNotFoundException;
+use App\Blog\Like;
+use App\Blog\Repositories\LikesRepository\LikesRepositoryInterface;
+use App\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
+use App\Blog\UUID;
+use App\Http\Actions\ActionInterface;
+use App\Http\ErrorResponse;
+use App\http\Request;
+use App\http\Response;
+use App\Http\SuccessfulResponse;
 
 class CreatePostLike implements ActionInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog\Container;
+namespace App\Blog\Container;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\NotFoundException;
+use App\Blog\Exceptions\NotFoundException;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 

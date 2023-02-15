@@ -1,9 +1,9 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog\UnitTests\Commands;
+namespace App\Blog\UnitTests\Commands;
 
-use GeekBrains\LevelTwo\Blog\Commands\Arguments;
-use GeekBrains\LevelTwo\Blog\Exceptions\ArgumentsException;
+use App\Blog\Commands\Arguments;
+use App\Blog\Exceptions\ArgumentsException;
 use PHPUnit\Framework\TestCase;
 
 class ArgumentsTest extends TestCase

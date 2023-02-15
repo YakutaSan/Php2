@@ -1,6 +1,8 @@
 <?php
 
-namespace GeekBrains\Blog\UnitTests\Container;
+namespace App\Blog\UnitTests\Container;
+use App\Blog\UnitTests\Container\SomeClassWithoutDependencies;
+use App\Blog\UnitTests\Container\SomeClassWithParameter;
 
 class ClassDependingOnAnother
 {

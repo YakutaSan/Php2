@@ -1,9 +1,9 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http\Auth;
+namespace App\Http\Auth;
 
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Http\Request;
+use App\Blog\User;
+use App\Http\Request;
 
 interface IdentificationInterface
 {

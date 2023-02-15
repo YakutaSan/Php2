@@ -1,6 +1,6 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog;
+namespace App\Blog;
 
 class Comment
 {

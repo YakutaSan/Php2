@@ -1,6 +1,6 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog;
+namespace App\Blog;
 
 /*
  CREATE TABLE likes (

@@ -1,17 +1,17 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Commands;
+namespace App\Commands;
 
-use GeekBrains\Blog\UnitTests\DummyLogger;
-use GeekBrains\LevelTwo\Blog\Commands\Arguments;
-use GeekBrains\LevelTwo\Blog\Commands\CreateUserCommand;
-use GeekBrains\LevelTwo\Blog\Exceptions\ArgumentsException;
-use GeekBrains\LevelTwo\Blog\Exceptions\CommandException;
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\DummyUsersRepository;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
+use App\Blog\UnitTests\DummyLogger;
+use App\Blog\Commands\Arguments;
+use App\Blog\Commands\CreateUserCommand;
+use App\Blog\Exceptions\ArgumentsException;
+use App\Blog\Exceptions\CommandException;
+use App\Blog\Exceptions\UserNotFoundException;
+use App\Blog\Repositories\UsersRepository\DummyUsersRepository;
+use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use App\Blog\User;
+use App\Blog\UUID;
 use PHPUnit\Framework\TestCase;
 
 class CreateUserCommandTest extends TestCase

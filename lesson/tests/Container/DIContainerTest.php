@@ -1,12 +1,11 @@
 <?php
 
-namespace GeekBrains\Blog\UnitTests\Container;
+namespace App\Blog\UnitTests\Container;
 
-use GeekBrains\LevelTwo\Blog\Container\DIContainer;
-use GeekBrains\LevelTwo\Blog\Exceptions\NotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\InMemoryUsersRepository;
 
+
+use App\Blog\Container\DIContainer;
+use App\Blog\UnitTests\Container\SomeClassWithParameter;
 use PHPUnit\Framework\TestCase;
 
 class DIContainerTest extends TestCase

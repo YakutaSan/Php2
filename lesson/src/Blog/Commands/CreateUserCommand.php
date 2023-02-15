@@ -1,15 +1,15 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog\Commands;
+namespace App\Blog\Commands;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\ArgumentsException;
-use GeekBrains\LevelTwo\Blog\Exceptions\CommandException;
-use GeekBrains\LevelTwo\Blog\Exceptions\InvalidArgumentException;
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Person\Name;
+use App\Blog\Exceptions\ArgumentsException;
+use App\Blog\Exceptions\CommandException;
+use App\Blog\Exceptions\InvalidArgumentException;
+use App\Blog\Exceptions\UserNotFoundException;
+use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use App\Blog\User;
+use App\Blog\UUID;
+use App\Person\Name;
 use Psr\Log\LoggerInterface;
 
 //php cli.php username=ivan first_name=Ivan last_name=Nikitin

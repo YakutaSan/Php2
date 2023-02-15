@@ -1,25 +1,28 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog\Repositories\UsersRepository;
+namespace App\Blog\Repositories\UsersRepository;
 
-use GeekBrains\LevelTwo\Blog\Commands\Arguments;
-use GeekBrains\LevelTwo\Blog\Commands\CreateUserCommand;
-use GeekBrains\LevelTwo\Blog\Exceptions\InvalidArgumentException;
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Person\Name;
+use App\Blog\Commands\Arguments;
+use App\Blog\Commands\CreateUserCommand;
+use App\Blog\Exceptions\InvalidArgumentException;
+use App\Blog\Exceptions\UserNotFoundException;
+use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use App\Blog\User;
+use App\Blog\UUID;
+use App\Person\Name;
 use \PDO;
 use \PDOStatement;
+use Psr\Log\LoggerInterface;
 
 class SqliteUsersRepository implements UsersRepositoryInterface
 {
     private PDO $connection;
+    private LoggerInterface $logger;
 
-    public function __construct(PDO $connection)
+    public function __construct(PDO $connection, LoggerInterface $logger)
     {
         $this->connection = $connection;
+        $this->logger = $logger;
     }
 
 
@@ -52,6 +55,7 @@ class SqliteUsersRepository implements UsersRepositoryInterface
             ':username' => $user->username(),
         ]);
 
+        $this->logger->info("User created: {$user->uuid()}");
     }
 
     // Также добавим метод для получения
@@ -95,9 +99,10 @@ class SqliteUsersRepository implements UsersRepositoryInterface
     {
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
         if ($result === false) {
-            throw new UserNotFoundException(
-                "Cannot find user: $errorString"
-            );
+            $message = "Cannot find user: $errorString";
+            $this->logger->warning($message);
+
+            throw new UserNotFoundException($message);
         }
         // Создаём объект пользователя с полем username
         return new User(

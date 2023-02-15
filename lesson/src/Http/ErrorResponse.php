@@ -1,6 +1,6 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http;
+namespace App\Http;
 
 class ErrorResponse extends Response
 {

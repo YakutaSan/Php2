@@ -1,15 +1,16 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http\Actions\Posts;
+namespace App\Http\Actions\Posts;
+use App\Blog\Exceptions\PostNotFoundException;
+use App\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
+use App\Blog\UUID;
+use App\Http\Actions\ActionInterface;
+use App\Http\ErrorResponse;
+use App\Http\Request;
+use App\Http\Response;
+use App\Http\SuccessfulResponse;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\PostNotFoundException;
-use GeekBrains\LevelTwo\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Http\Actions\ActionInterface;
-use GeekBrains\LevelTwo\Http\ErrorResponse;
-use GeekBrains\LevelTwo\Http\SuccessfulResponse;
-use GeekBrains\LevelTwo\http\Request;
-use GeekBrains\LevelTwo\http\Response;
+
 
 class DeletePost implements ActionInterface
 {

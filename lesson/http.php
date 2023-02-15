@@ -1,17 +1,11 @@
 <?php
 
 
-use GeekBrains\LevelTwo\Blog\Exceptions\AppException;
-use GeekBrains\LevelTwo\Blog\Repositories\PostsRepository\SqlitePostsRepository;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\SqliteUsersRepository;
-use GeekBrains\LevelTwo\Http\Actions\Posts\CreatePost;
-use GeekBrains\LevelTwo\Http\Actions\Users\CreateUser;
-use GeekBrains\LevelTwo\Http\Actions\Users\FindByUsername;
-use GeekBrains\LevelTwo\Http\ErrorResponse;
-use GeekBrains\LevelTwo\Http\Request;
-use GeekBrains\LevelTwo\Http\SuccessfulResponse;
-use GeekBrains\LevelTwo\Http\Actions\Posts\DeletePost;
-use GeekBrains\LevelTwo\Http\Actions\Likes\CreatePostLike;
+
+use App\Blog\Exceptions\AppException;
+use App\Blog\Exceptions\HttpException;
+use App\Http\ErrorResponse;
+use App\Http\Request;
 use Psr\Log\LoggerInterface;
 
 $container = require __DIR__ . '/bootstrap.php';

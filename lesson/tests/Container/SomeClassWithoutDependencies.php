@@ -1,6 +1,6 @@
 <?php
 
-namespace GeekBrains\Blog\UnitTests\Container;
+namespace App\Blog\UnitTests\Container;
 
 class SomeClassWithoutDependencies
 {

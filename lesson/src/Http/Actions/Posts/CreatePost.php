@@ -1,23 +1,19 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http\Actions\Posts;
-
-use GeekBrains\LevelTwo\Blog\Exceptions\AuthException;
-use GeekBrains\LevelTwo\Blog\Exceptions\InvalidArgumentException;
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Post;
-use GeekBrains\LevelTwo\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Blog\Exceptions\HttpException;
-use GeekBrains\LevelTwo\http\Actions\ActionInterface;
-use GeekBrains\LevelTwo\Http\Auth\IdentificationInterface;
-use GeekBrains\LevelTwo\Http\Auth\JsonBodyUsernameIdentification;
-use GeekBrains\LevelTwo\http\ErrorResponse;
-use GeekBrains\LevelTwo\http\Request;
-use GeekBrains\LevelTwo\http\Response;
-use GeekBrains\LevelTwo\http\SuccessfulResponse;
+namespace App\Http\Actions\Posts;
+use App\Blog\Exceptions\AuthException;
+use App\Blog\Exceptions\HttpException;
+use App\Blog\Post;
+use App\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
+use App\Blog\UUID;
+use App\Http\Actions\ActionInterface;
+use App\Http\Auth\IdentificationInterface;
+use App\Http\ErrorResponse;
+use App\Http\Request;
+use App\Http\Response;
+use App\Http\SuccessfulResponse;
 use Psr\Log\LoggerInterface;
+
 
 class CreatePost implements ActionInterface
 {
@@ -34,7 +30,7 @@ class CreatePost implements ActionInterface
 
     /**
      * @throws AuthException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function handle(Request $request): Response
     {

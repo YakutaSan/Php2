@@ -1,7 +1,7 @@
 <?php
-namespace GeekBrains\LevelTwo\Blog;
+namespace App\Blog;
 
-use GeekBrains\LevelTwo\Person\Name;
+use App\Person\Name;
 
 class User
 {

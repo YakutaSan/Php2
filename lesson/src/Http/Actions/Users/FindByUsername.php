@@ -1,15 +1,16 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http\Actions\Users;
+namespace App\Http\Actions\Users;
+use App\Blog\Exceptions\HttpException;
+use App\Blog\Exceptions\UserNotFoundException;
+use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use App\Http\Actions\ActionInterface;
+use App\Http\ErrorResponse;
+use App\Http\Request;
+use App\Http\Response;
+use App\Http\SuccessfulResponse;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\HttpException;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Http\Actions\ActionInterface;
-use GeekBrains\LevelTwo\http\ErrorResponse;
-use GeekBrains\LevelTwo\http\Request;
-use GeekBrains\LevelTwo\http\Response;
-use GeekBrains\LevelTwo\http\SuccessfulResponse;
+
 
 class FindByUsername implements ActionInterface
 {

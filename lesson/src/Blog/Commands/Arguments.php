@@ -1,8 +1,8 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog\Commands;
+namespace App\Blog\Commands;
 
-use GeekBrains\LevelTwo\Blog\Exceptions\ArgumentsException;
+use App\Blog\Exceptions\ArgumentsException;
 
 class Arguments
 {

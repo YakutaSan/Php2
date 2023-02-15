@@ -1,23 +1,20 @@
 <?php
 
 namespace Actions;
-
-
-use GeekBrains\LevelTwo\Http\ErrorResponse;
-use GeekBrains\LevelTwo\Blog\Exceptions\JsonException;
-use GeekBrains\LevelTwo\Http\Actions\Posts\CreatePost;
-use GeekBrains\LevelTwo\http\Request;
-use GeekBrains\LevelTwo\http\SuccessfulResponse;
-use GeekBrains\LevelTwo\Person\Name;
-use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
-use GeekBrains\LevelTwo\Blog\Post;
-use GeekBrains\LevelTwo\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\UUID;
-use GeekBrains\LevelTwo\Blog\Exceptions\PostNotFoundException;
+use App\Blog\Exceptions\PostNotFoundException;
+use App\Blog\Exceptions\UserNotFoundException;
+use App\Blog\Post;
+use App\Blog\Repositories\PostsRepository\PostsRepositoryInterface;
+use App\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use App\Blog\User;
+use App\Blog\UUID;
+use App\Http\Actions\Posts\CreatePost;
+use App\Http\Request;
+use App\Person\Name;
+use App\Blog\UnitTests\DummyLogger;
 use PHPUnit\Framework\TestCase;
-use GeekBrains\Blog\UnitTests\DummyLogger;
+
+
 
 class CreatePostActionTest extends TestCase
 {

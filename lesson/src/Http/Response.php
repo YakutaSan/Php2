@@ -1,6 +1,6 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http;
+namespace App\Http;
 
 abstract class Response
 {

@@ -1,5 +1,5 @@
 <?php
-namespace GeekBrains\LevelTwo\Person;
+namespace App\Person;
 
 use \DateTimeImmutable;
 

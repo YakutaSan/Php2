@@ -1,9 +1,7 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Http\Actions;
+namespace App\Http\Actions;
 
-use GeekBrains\LevelTwo\http\Request;
-use GeekBrains\LevelTwo\http\Response;
 
 interface ActionInterface
 {
